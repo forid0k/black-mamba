@@ -1,0 +1,6 @@
+body { background: #111; color: #eee; font-family: Arial, sans-serif; padding: 20px; text-align: center; }
+select, button { margin: 10px; padding: 8px; border-radius: 5px; font-size: 16px; }
+.signal-board { background: #1f1f1f; padding: 20px; border-radius: 8px; margin-top: 30px; }
+.signal { margin: 6px 0; font-size: 20px; padding: 6px; border-radius: 4px; }
+.signal.buy { background: #0a0; }
+.signal.sell { background: #a00; }
