@@ -1,0 +1,13 @@
+
+
+- By default connects to `http://localhost:5000`
+- Listens for `signal` events and updates UI live
+
+---
+
+## 🔄 Strategy Selection (Optional)
+You can send strategy selection from UI to backend using Socket.IO messages like:
+
+```js
+socket.emit("set_strategy", { strategy: "ema" });
+
