@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF‑8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quotex Signal Panel</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>📡 Quotex Live Signal Panel</h1>
+  <label>
+    Market Type:
+    <select id="marketType" onchange="updateAssets()">
+      <option value="real">Real</option>
+      <option value="otc">OTC</option>
+    </select>
+  </label>
+  <label>
+    Asset:
+    <select id="assetSelect"></select>
+  </label>
+  <label>
+    Strategy:
+    <select id="strategy">
+      <option value="ema">EMA</option>
+      <option value="price-action">Price Action</option>
+      <option value="volume">Volume</option>
+    </select>
+  </label>
+  <div class="signal-board">
+    <h2>Live Signals</h2>
+    <div id="signals"></div>
+  </div>
+  
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <script>
+    const real = ["EURUSD","GBPUSD","USDJPY"];
+    const otc = ["EURUSD‑OTC","GBPUSD‑OTC","USDJPY‑OTC"];
+    const assetSelect = document.getElementById("assetSelect");
+
+    function updateAssets() {
+      const list = document.getElementById("marketType").value === "real" ? real : otc;
+      assetSelect.innerHTML = "";
+      list.forEach(a => {
+        const o = document.createElement("option");
+        o.value = a;
+        o.textContent = a;
+        assetSelect.appendChild(o);
+      });
+    }
+    updateAssets();
+
+    const socket = io("http://localhost:5000");
+    socket.on("connect", () => console.log("Connected"));
+    socket.on("signal", (d) => {
+      const el = document.createElement("div");
+      el.className = "signal " + d.signal.toLowerCase();
+      el.textContent = `📊 ${d.asset} | ${d.strategy.toUpperCase()} → ${d.signal}`;
+      document.getElementById("signals").prepend(el);
+    });
+
+    document.getElementById("strategy").addEventListener("change", function(){
+      socket.emit("set_strategy", { strategy: this.value });
+    });
+  </script>
+</body>
+</html>
