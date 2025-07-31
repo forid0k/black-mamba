@@ -1,0 +1,9 @@
+quotex-signal-bot/
+│
+├── backend/
+│   ├── app.py                  # Flask + Socket.IO server with Quotex WebSocket client 
+│   ├── requirements.txt       # Python dependency list
+│
+└── frontend/
+    ├── index.html             # Signal Panel UI (HTML + JS + CSS)
+    └── styles.css             # CSS স্টাইল (optional separate file)
