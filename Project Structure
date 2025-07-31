@@ -1,4 +1,4 @@
-quotex-signal-bot/
+black-mamba-bot/
 │
 ├── backend/
 │   ├── app.py                  # Flask + Socket.IO server with Quotex WebSocket client 
