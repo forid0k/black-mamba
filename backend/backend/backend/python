@@ -1,0 +1,4 @@
+@socketio.on("set_strategy")
+def handle_strategy(data):
+    global current_strategy
+    current_strategy = data["strategy"]
